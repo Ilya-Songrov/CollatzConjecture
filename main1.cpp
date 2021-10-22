@@ -65,7 +65,7 @@ void sequence(const mpz_class size, mpz_class *max_number)
                 number >>= 2;               // even_even
             }
             else {
-                number += (number / 2) + 1; // even_even or odd_even
+                number += (number / 2) + 1; // even_odd or odd_even
             }
 
             if (number < 3) {

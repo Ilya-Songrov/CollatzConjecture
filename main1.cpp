@@ -1,22 +1,23 @@
 #include <iostream>
 #include <ctime>
 #include <string>
+#include <regex>
 
 #include <gmpxx.h>
 
 int checkValidity(const int argc, char *argv[], mpz_class* input);
 void sequence(const mpz_class size, mpz_class* max_number);
-mpz_class sequence(const mpz_class var);
+mpz_class sequence(const mpz_class& var);
 void printElapsedTime(const clock_t begin, const clock_t end);
 void printResult(const mpz_class max_number);
 
 int main(int argc, char *argv[])
 {
-    mpz_class input    = 0;
+    mpz_class input = 0;
     if (checkValidity(argc, argv, &input)) {
         return EXIT_FAILURE;
     }
-    mpz_class max_number    = 0;
+    mpz_class max_number = 0;
 
     const clock_t begin = clock();
     sequence(input, &max_number);
@@ -33,14 +34,17 @@ int checkValidity(const int argc, char *argv[], mpz_class *input)
         std::cout << "Not a valid input" << std::endl << std::endl;
         return EXIT_FAILURE;
     }
-    const std::string inputStr = argv[1];
+    const std::string inputStr(argv[1]);
     std::cout << "input: " << inputStr << std::endl << std::endl;
-    *input = atoi(argv[1]);
-    if (*input < 2) {
-        std::cout << "Not a valid input" << std::endl << std::endl;
-        return EXIT_FAILURE;
+    const std::regex only_num_regex("^[0-9]*$" );
+    if (std::regex_match(inputStr, only_num_regex)) {
+        *input = mpz_class(inputStr);
+        if (*input > 1) {
+            return EXIT_SUCCESS;
+        }
     }
-    return EXIT_SUCCESS;
+    std::cout << "Not a valid input" << std::endl << std::endl;
+    return EXIT_FAILURE;
 }
 
 void sequence(const mpz_class size, mpz_class *max_number)
@@ -81,7 +85,7 @@ void sequence(const mpz_class size, mpz_class *max_number)
     *max_number     = _max_number;
 }
 
-mpz_class sequence(const mpz_class var)
+mpz_class sequence(const mpz_class &var)
 {
     mpz_class number = var;
     mpz_class count = 2;

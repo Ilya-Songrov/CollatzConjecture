@@ -104,6 +104,7 @@ mpz_class maxSequenceFromRange(const mpz_class size)
         else if (number == 1){
             ++count;
         }
+
         if (count > _max_path) {
             _max_path = count;
             _max_number = var;
@@ -156,6 +157,14 @@ void printElapsedTime(const clock_t begin, const clock_t end)
 
 void printResult(const mpz_class max_number)
 {
+    if (max_number < 1) {
+        std::cout << "Longest Collatz sequence: ";
+        return;
+    }
+    if (max_number == 1) {
+        std::cout << "Longest Collatz sequence: " << max_number;
+        return;
+    }
     mpz_class number = max_number;
     std::cout << "Longest Collatz sequence: " << number;
     while (number > 1) {

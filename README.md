@@ -7,7 +7,7 @@ git checkout master
 git pull
 mkdir build
 cd build
-g++ ../main1.cpp -lgmpxx -lgmp
-g++ ../main2.cpp -lgmpxx -lgmp
+g++ ../main1.cpp -lgmpxx -lgmp -o collatzconjecture1
+g++ ../main2.cpp -lgmpxx -lgmp -o collatzconjecture2
 ```
 

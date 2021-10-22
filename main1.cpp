@@ -47,25 +47,28 @@ void sequence(const mpz_class size, mpz_class *max_number)
 {
     mpz_class top_number     = size - 1;
     mpz_class _max_number    = top_number;
-    mpz_class _max_path      = (mpz_class(top_number) &= 1) ? 0 : sequence(top_number);
+    mpz_class _max_path      = mpz_tstbit(top_number.get_mpz_t(), 0) ? 0 : sequence(top_number);
     top_number              = _max_path == 0 ? top_number : top_number - 1;
 
     for (mpz_class var = top_number;  var > 2;  var -= 2) {
         mpz_class number = var;
-#if 1
         mpz_class count = 2;
-        while ((number = ((mpz_class(number) &= 3) ? (mpz_class(number) >>= 1) + number + 1 : (mpz_class(number) >>= 2))) > 2){
+        while (true){
+            const auto tstbit0 = mpz_tstbit(number.get_mpz_t(), 0);
+            const auto tstbit1 = mpz_tstbit(number.get_mpz_t(), 1);
+            const bool divisibleByFour = tstbit0 == 0 && tstbit1 == 0;
+            if (divisibleByFour) {
+                number >>= 2;               // even_even
+            }
+            else {
+                number += (number / 2) + 1; // even_even or odd_even
+            }
+
+            if (number < 3) {
+                break;
+            }
             count += 2;
         }
-#else
-        mpz_class count = 0;
-        do {
-            count += 2;
-            const mpz_class even_even = (number >> 2);
-            const mpz_class even_odd = (number >> 1) + number + 1;  // also works for the odd_even case
-            number = (number & 3) ? even_odd : even_even;
-        } while (number > 2);
-#endif
 
         if (number == 2){
             ++count;
@@ -82,7 +85,20 @@ mpz_class sequence(const mpz_class var)
 {
     mpz_class number = var;
     mpz_class count = 2;
-    while ((number = ((mpz_class(number) &= 3) ? (mpz_class(number) >>= 1) + number + 1 : (mpz_class(number) >>= 2))) > 2){
+    while (true){
+        const auto tstbit0 = mpz_tstbit(number.get_mpz_t(), 0);
+        const auto tstbit1 = mpz_tstbit(number.get_mpz_t(), 1);
+        const bool divisibleByFour = tstbit0 == 0 && tstbit1 == 0;
+        if (divisibleByFour) {
+            number >>= 2;               // even_even
+        }
+        else {
+            number += (number / 2) + 1; // even_odd or odd_even
+        }
+
+        if (number < 3) {
+            break;
+        }
         count += 2;
     }
     if (number == 2){
@@ -102,7 +118,8 @@ void printResult(const mpz_class max_number)
     mpz_class number = max_number;
     std::cout << "Longest Collatz sequence: " << number;
     while (number > 1) {
-        if (mpz_class(number) &= 1) {
+        const auto tstbit0 = mpz_tstbit(number.get_mpz_t(), 0);
+        if (tstbit0 == 1) {
             number = number * 3 + 1;
         }
         else{

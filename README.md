@@ -1,3 +1,7 @@
+### Collatz conjecture
+It is also known as the 3n + 1 problem, the 3n + 1 conjecture, the Ulam conjecture.
+
+
 ## How to build (Ubuntu 20.04)
 ```
 sudo apt-get install libgmp-dev -y

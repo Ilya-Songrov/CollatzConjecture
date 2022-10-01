@@ -23,7 +23,7 @@ public:
 #ifdef BUILD_DEBUG
     std::vector<const char*> new_argv(argv, argv + argc);
     new_argv.push_back("--input_num");
-    new_argv.push_back("123124");
+    new_argv.push_back("123123");
     new_argv.push_back(nullptr); // or NULL if you are using an old compiler
     argv = const_cast<char**>(new_argv.data()); // or &new_argv[0] if you are using an old compiler
     argc = argc + int(new_argv.size() - 2);

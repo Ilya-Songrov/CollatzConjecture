@@ -45,12 +45,8 @@ add_executable(
     ${PROJECT_NAME}
     main.cpp
     ArgumentParser.hpp
-    CollatzSequences/CollatzSequenceBase.hpp
-    CollatzSequences/CollatzSequenceBase.cpp
     CollatzSequences/CollatzSequenceMath.hpp
     CollatzSequences/CollatzSequenceMath.cpp
-    CollatzSequences/CollatzSequenceMemory.hpp
-    CollatzSequences/CollatzSequenceMemory.cpp
 )
 
 message(STATUS "PROJECT_NAME:               ${PROJECT_NAME}")

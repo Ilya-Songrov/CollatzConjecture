@@ -1,6 +1,5 @@
 #include "ArgumentParser.hpp"
 #include "CollatzSequences/CollatzSequenceMath.hpp"
-#include "CollatzSequences/CollatzSequenceMemory.hpp"
 
 int main(int argc, char *argv[])
 {
@@ -13,10 +12,6 @@ int main(int argc, char *argv[])
     CollatzSequenceMath collatzSequenceMath;
     collatzSequenceMath.countMaxSequenceFromRange(arguments->input_num);
     collatzSequenceMath.printResult();
-
-    CollatzSequenceMemory collatzSequenceMemory;
-    collatzSequenceMemory.countMaxSequenceFromRange(arguments->input_num);
-    collatzSequenceMemory.printResult();
 
     return EXIT_SUCCESS;
 }

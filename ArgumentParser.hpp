@@ -71,6 +71,6 @@ private:
         {
             ss << argv[i] << ' ';
         }
-        std::cout << ss.str() << std::endl;
+        std::cout << ss.str() << std::endl << std::endl;
     }
 };

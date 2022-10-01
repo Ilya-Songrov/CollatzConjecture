@@ -3,7 +3,7 @@
 #include <cassert>
 #include <chrono>
 
-CollatzSequenceMath::CollatzSequenceMath() : CollatzSequenceBase()
+CollatzSequenceMath::CollatzSequenceMath() : CollatzSequenceBase(__FUNCTION__)
 {
     assert(getSequenceLength(-1) == 0);
     assert(getSequenceLength(0) == 0);
@@ -22,17 +22,10 @@ CollatzSequenceMath::CollatzSequenceMath() : CollatzSequenceBase()
 
 void CollatzSequenceMath::countMaxSequenceFromRange(int64_t input)
 {
-    _input = input;
     const auto start = std::chrono::steady_clock::now();
-    _result = getMaxSequenceFromRange(_input);
+    _num_max_sequence = getMaxSequenceFromRange(input);
     const auto end = std::chrono::steady_clock::now();
     _elapsed_time = end - start;
-}
-
-void CollatzSequenceMath::printResult() const
-{
-    printElapsedTime();
-    printLongestCollatzSequence();
 }
 
 int64_t CollatzSequenceMath::getMaxSequenceFromRange(int64_t inputRange)
@@ -93,38 +86,4 @@ int64_t CollatzSequenceMath::getSequenceLengthInputMore2(int64_t var)
         ++count;
     }
     return count;
-}
-
-void CollatzSequenceMath::printElapsedTime() const
-{
-    std::cout << "Elapsed time = " << std::chrono::duration_cast<std::chrono::milliseconds>(_elapsed_time).count() << " milliseconds" << std::endl;
-    std::cout << "Elapsed time = " << std::chrono::duration_cast<std::chrono::microseconds>(_elapsed_time).count() << " microseconds" << std::endl;
-    std::cout << "Elapsed time = " << std::chrono::duration_cast<std::chrono::nanoseconds>(_elapsed_time).count() << " nanoseconds" << std::endl;
-    std::cout << std::endl;
-}
-
-void CollatzSequenceMath::printLongestCollatzSequence() const
-{
-    std::cout << "Longest Collatz sequence: ";
-    if (_result < 1) {
-        std::cout << "null";
-        return;
-    }
-    if (_result == 1) {
-        std::cout << _result;
-        return;
-    }
-    std::int64_t number = _result;
-    std::cout << number;
-    while (number > 1) {
-        const auto tstbit0 = number & (1 << 0);
-        if (tstbit0 == 1) {
-            number = number * 3 + 1;
-        }
-        else{
-            number /= 2;
-        }
-        std::cout << " " << number;
-    }
-    std::cout << std::endl << std::endl;
 }

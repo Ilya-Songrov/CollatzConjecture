@@ -46,8 +46,11 @@ add_executable(
     main.cpp
     ArgumentParser.hpp
     CollatzSequences/CollatzSequenceBase.hpp
+    CollatzSequences/CollatzSequenceBase.cpp
     CollatzSequences/CollatzSequenceMath.hpp
     CollatzSequences/CollatzSequenceMath.cpp
+    CollatzSequences/CollatzSequenceMemory.hpp
+    CollatzSequences/CollatzSequenceMemory.cpp
 )
 
 message(STATUS "PROJECT_NAME:               ${PROJECT_NAME}")
@@ -93,11 +96,11 @@ endif()
 
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_20)
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fPIC")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fstrict-aliasing -Wall -Wextra -Wno-comment -Wdouble-promotion -Wswitch-default -Wswitch-enum -Wuninitialized -Wstrict-aliasing -Wfloat-equal -Wshadow -Wplacement-new -Wcast-align -Wconversion -Wlogical-op")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wduplicated-cond -Wduplicated-branches -Wrestrict -Wnull-dereference -Wno-terminate")
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ffunction-sections -fdata-sections")
-set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG} -g")
+#set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG} -g")
+set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS_DEBUG} -O3")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS_RELEASE} -O3")
 set(CMAKE_VERBOSE_MAKEFILE ON)

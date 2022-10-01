@@ -5,15 +5,13 @@
 
 #include "CollatzSequenceBase.hpp"
 
-class CollatzSequenceMath : public CollatzSequenceBase
+class CollatzSequenceMemory : public CollatzSequenceBase
 {
 public:
-    explicit CollatzSequenceMath();
+    explicit CollatzSequenceMemory();
 
     void countMaxSequenceFromRange(std::int64_t input) override;
 
 private:
     inline std::int64_t getMaxSequenceFromRange(std::int64_t inputRange);
-    inline std::int64_t getSequenceLength(std::int64_t var);
-    inline std::int64_t getSequenceLengthInputMore2(std::int64_t var);
 };
